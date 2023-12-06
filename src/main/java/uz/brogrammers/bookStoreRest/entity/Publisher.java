@@ -1,8 +1,12 @@
 package uz.brogrammers.bookStoreRest.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "publisher")
 public class Publisher {
     @Id
