@@ -3,13 +3,11 @@ package uz.brogrammers.bookStoreRest.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import uz.brogrammers.bookStoreRest.entity.Book;
 import uz.brogrammers.bookStoreRest.mapper.BookMapper;
 import uz.brogrammers.bookStoreRest.model.BookModel;
 import uz.brogrammers.bookStoreRest.respository.AuthorRepository;
 import uz.brogrammers.bookStoreRest.respository.BookRepository;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
