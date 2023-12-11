@@ -22,9 +22,11 @@ public class BookController {
 
     @GetMapping("/all")
     public List<BookResponse> getAllV2() {
-        return bookService.getAll().stream()
+        var list = bookService.getAll().stream()
                 .map(bookMapper::mapFromModelToDto)
                 .toList();
+
+        return list;
     }
 
     @PostMapping("/create")

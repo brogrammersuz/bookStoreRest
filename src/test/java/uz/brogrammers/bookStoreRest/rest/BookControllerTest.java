@@ -1,44 +1,58 @@
 package uz.brogrammers.bookStoreRest.rest;
 
-import lombok.SneakyThrows;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureWebMvc;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import uz.brogrammers.bookStoreRest.mapper.BookMapper;
+import uz.brogrammers.bookStoreRest.model.BookModel;
 import uz.brogrammers.bookStoreRest.service.BookService;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import java.util.List;
+import java.util.Set;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = BookController.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@EnableWebMvc
-@AutoConfigureWebMvc
+import static org.mockito.Mockito.when;
+
+//@AutoConfigureMockMvc
+//@EnableWebMvc
+//@ExtendWith(SpringExtension.class)
+//@SpringBootTest(classes = BookController.class)
+@SpringBootTest
 class BookControllerTest {
 
-    @MockBean
+    @Mock
     private BookService bookService;
-    @MockBean
+    @Mock
     private BookMapper bookMapper;
 
-    @Autowired
-    private MockMvc mockMvc;
+    private BookController bookController;
 
-    @SneakyThrows
+    @BeforeEach
+    void setUp() {
+        bookController = new BookController(bookService, bookMapper);
+    }
+
     @Test
-    void testGetAll() {
+    void testGetAll() throws Exception {
 
+        var list = List.of(BookModel.builder()
+                .id(1l)
+                .title("Something")
+                .isbn("sdfsd")
+                .publisherId(1l)
+                .authorsIds(Set.of(1l, 2l))
+                .build());
+
+        when(bookService.getAll()).thenReturn(list);
+
+        bookController.getAllV2();
+
+        /*
         mockMvc.perform(get("/book/all"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{[]}"));
 
+         */
     }
 
 

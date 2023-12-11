@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "title": "Something",
+    "isbn": "dsgfgdf",
+    "publisherId": 1,
+    "authorsIds": [
+      1
+    ]
+  }
+]
