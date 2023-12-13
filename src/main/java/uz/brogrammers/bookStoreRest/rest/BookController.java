@@ -1,5 +1,6 @@
 package uz.brogrammers.bookStoreRest.rest;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ public class BookController {
     private final BookService bookService;
     private final BookMapper bookMapper;
 
+    @Operation(summary = "Get All books")
     @GetMapping("/all")
     public List<BookResponse> getAllV2() {
         var list = bookService.getAll().stream()
@@ -29,6 +31,7 @@ public class BookController {
         return list;
     }
 
+    @Operation(summary = "Create book")
     @PostMapping("/create")
     public void createBook(@RequestBody CreateBookRequest request) {
 
@@ -37,6 +40,7 @@ public class BookController {
         log.info("New book is created");
     }
 
+    @Operation(summary = "Get book by id")
     @GetMapping("/{id}")
     public BookResponse findById(@PathVariable(name = "id") Long id) {
         return bookService.findById(id)
@@ -44,6 +48,7 @@ public class BookController {
                 .orElseThrow(() -> new NoSuchElementException("Book with id " + id + " not found"));
     }
 
+    @Operation(summary = "Update book")
     @PutMapping("/update/{id}")
     public BookResponse update(@RequestBody CreateBookRequest request, @PathVariable Long id) {
         var book = bookService.findById(id).orElseThrow();
@@ -56,6 +61,7 @@ public class BookController {
 
     }
 
+    @Operation(summary = "Delete book by id")
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         bookService.deleteById(id);
