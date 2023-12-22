@@ -21,7 +21,6 @@ import java.io.IOException;
 public class JwtAuthTokenFilter extends OncePerRequestFilter {
 
     private final JwtProvider tokenProvider;
-
     private final UserDetailsServiceImpl userDetailsServiceImpl;
 
     @Override
@@ -39,7 +38,7 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (Exception e) {
-            log.error("Can not set user authentication -> Message: {}", e);
+            log.error("Can not set user authentication -> Message: {}", e.getMessage());
         }
 
         filterChain.doFilter(request, response);
